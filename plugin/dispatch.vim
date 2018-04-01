@@ -75,6 +75,7 @@ endfunction
 
 if !exists('g:dispatch_handlers')
   let g:dispatch_handlers = [
+        \ 'job',
         \ 'tmux',
         \ 'screen',
         \ 'windows',
