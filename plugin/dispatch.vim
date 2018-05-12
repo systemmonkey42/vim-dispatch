@@ -54,12 +54,14 @@ function! s:map(mode, lhs, rhs, ...) abort
 endfunction
 
 nmap <script> <SID>:.    :<C-R>=getcmdline() =~ ',' ? "\0250" : ""<CR>
-call s:map('n', 'm<CR>', '<SID>:.Make<CR>')
-call s:map('n', 'm<Space>', '<SID>:.Make<Space>')
-call s:map('n', 'm!', '<SID>:.Make!')
-call s:map('n', 'd<CR>', '<SID>:.Dispatch<CR>')
-call s:map('n', 'd<Space>', '<SID>:.Dispatch<Space>')
-call s:map('n', 'd!', '<SID>:.Dispatch!')
+if get( g:, 'dispatch_default_mapping', 1 )
+    call s:map('n', 'm<CR>', '<SID>:.Make<CR>')
+    call s:map('n', 'm<Space>', '<SID>:.Make<Space>')
+    call s:map('n', 'm!', '<SID>:.Make!')
+    call s:map('n', 'd<CR>', '<SID>:.Dispatch<CR>')
+    call s:map('n', 'd<Space>', '<SID>:.Dispatch<Space>')
+    call s:map('n', 'd!', '<SID>:.Dispatch!')
+endif
 
 function! DispatchComplete(id) abort
   return dispatch#complete(a:id)
